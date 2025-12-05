@@ -1,5 +1,7 @@
 // LeetCode #92: Reverse Linked List
 // https://leetcode.com/problems/reverse-linked-list
+#include<bits/stdc++.h>
+using namespace std;
 
 class ListNode {
 public:
