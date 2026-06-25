@@ -18,12 +18,12 @@ public:
                     vis[i][n-1]=1;
                 }
             }
-            for(int j=0;j<n;j++){
-                if(board[0][j]=='O'){
+        for(int j=0;j<n;j++){
+            if(board[0][j]=='O'){
                     q.push({0,j});
                     vis[0][j]=1;
-                }
-                if(board[m-1][j]=='O'){
+            }
+            if(board[m-1][j]=='O'){
                     q.push({m-1,j});
                     vis[m-1][j]=1;
                 }
