@@ -1,30 +1,58 @@
-class Solution {
-private: 
-    void dfs(vector<vector<int>>& stones,int index, vector<bool>& vis){
-        vis[index]=1;
-
-        for(int i=0;i<stones.size();i++){
-            int row = stones[index][0];
-            int col = stones[index][1];
-            if((!vis[i]) && (stones[i][0]==row || stones[i][1]==col)){
-                dfs(stones, i , vis);
-            }
-        }
-    } 
+class DSU{
 public:
+    vector<int> rank, parent;
+    DSU(int n){
+        rank.resize(n,1);
+        parent.resize(n);
+        for(int i=0;i<n;i++){
+            parent[i]=i;
+        }
+    }
 
+    int findparent(int i){
+        return i==parent[i] ? i : parent[i]=findparent(parent[i]);
+    }
 
+    void unionbyrank(int x, int y){
+
+        int x_parent=findparent(x);
+        int y_parent=findparent(y);
+
+        if(x_parent==y_parent) return;
+
+        if(rank[x_parent] < rank[y_parent]){
+            parent[x_parent] = y_parent;
+        }
+        else if(rank[x_parent] > rank[y_parent]){
+            parent[y_parent] = x_parent;
+        }
+        else{
+            parent[y_parent]=x_parent;
+            rank[x_parent]+=1;
+        }
+    return;
+    }
+
+};
+
+class Solution {
+public:
     int removeStones(vector<vector<int>>& stones) {
         int n=stones.size();
-        vector<bool> vis(n,0);
+        DSU dsu(n);
 
-        int components=0;
         for(int i=0;i<n;i++){
-            if(!vis[i]){
-                dfs(stones,i,vis);
-                components++;
+            for(int j=i+1;j<n;j++){
+                if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1]){
+                    dsu.unionbyrank(i,j);
+                }
             }
         }
-        return n-components;
+        int groups=0;
+        int m = dsu.parent.size();
+        for(int i=0;i<m;i++){
+            if(i==dsu.parent[i]) groups++;
+        }
+    return n-groups;
     }
 };
