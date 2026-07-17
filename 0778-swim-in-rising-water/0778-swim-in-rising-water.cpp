@@ -19,7 +19,7 @@ public:
             pq.pop();
             if (vis[x][y] == 1)
                 continue;
-            else if (x == n - 1 && y == n - 1)
+            if(x == n - 1 && y == n - 1)
                 return eval;
             vis[x][y] = 1;
 
