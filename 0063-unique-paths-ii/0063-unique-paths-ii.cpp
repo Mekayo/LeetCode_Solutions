@@ -2,15 +2,11 @@ class Solution {
 public:
     int rec(vector<vector<int>>& ob, vector<vector<int>>& dp, int r, int c,
             int n,int m) {
-        if (r == n - 1 && c == m - 1)
-            return 1;
-        if (r >= n || c >= m)
-            return 0;
-        if (ob[r][c] == 1)
-            return 0;
+        if (r == n - 1 && c == m - 1) return 1;
 
-        if (dp[r][c] != -1)
-            return dp[r][c];
+        if (ob[r][c] == 1) return 0;
+
+        if (dp[r][c] != -1) return dp[r][c];
 
         int Rcnt = 0, Dcnt = 0;
         if (c < m - 1) {
