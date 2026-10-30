@@ -15,12 +15,10 @@ public:
         if(!t1 && !t2) return true;
         if(!t1 || !t2) return false;
 
-        return (t1->val==t2->val) && ismirror(t1->left,t2->right) &&ismirror(t1->right,t2->left);
+        return (t1->val==t2->val) && ismirror(t1->left, t2->right) && ismirror(t1->right, t2->left);
     }
-
     bool isSymmetric(TreeNode* root) {
         if(!root) return true;
         return ismirror(root->left,root->right);
     }
-
 };
